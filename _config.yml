@@ -6,3 +6,5 @@ exclude:
   - backend/.git
   - backend/dist
   - README.md
+baseurl: "/repo-name"
+url: "https://mrdeveloper917.github.io"
