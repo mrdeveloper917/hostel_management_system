@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard</title>
+  <!-- <link rel="shortcut icon" href="../images/logo_.jpg" type="image/jpg"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body style="background-color: #f3f9ff; font-family: 'Segoe UI', sans-serif;">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg px-4 sticky-top" style="background-color: #174374;">
+    <div class="container-fluid">
+      <a class="navbar-brand text-warning fw-bold" href="#">
+        <img src="../images/logo.jpg" alt="" height="30" /> Hostel System
+      </a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-white" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="../pages/student_logout.html" onclick="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Welcome -->
+  <div class="container text-center mt-5">
+    <h2>Welcome to Your Dashboard, <span id="studentName"></span>!</h2>
+    <p class="text-muted">Explore your hostel info, submit complaints, and more.</p>
+  </div>
+
+  <!-- Dashboard Cards -->
+  <div class="container mt-4">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="p-4 shadow rounded text-center" style="background: #ffd66b;">
+          <h5>Your Profile</h5>
+          <p>Personal info and hostel details</p>
+          <a href="../pages/Student_profile.html" class="btn btn-dark btn-sm">View</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 shadow rounded text-center" style="background: #fba937;">
+          <h5>Submit Complaint</h5>
+          <p>Send complaint to admin</p>
+          <a href="../pages/Student_complaint.html" class="btn btn-dark btn-sm">Submit</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 shadow rounded text-center" style="background: #fddf91;">
+          <h5>Notices</h5>
+          <p>Check hostel announcements</p>
+          <a href="#" class="btn btn-dark btn-sm">Read</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const name = localStorage.getItem("loggedInStudent");
+    document.getElementById("studentName").textContent = name ?? "Student";
+
+    function logout() {
+      localStorage.removeItem("loggedInStudent");
+      window.location.href = "../pages/login_page.html";
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/student_login.js"></script>
+</body>
+</html>

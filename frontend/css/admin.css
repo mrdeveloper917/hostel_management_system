@@ -1,0 +1,123 @@
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #174374, #1e90ff);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+nav.navbar {
+  background-color: #174374;
+  color: white;
+  padding: 15px 30px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Footer */
+footer {
+  background-color: #fff;
+  color: #174374;
+  text-align: center;
+  padding: 12px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+
+/* Wrapper */
+.login-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;   /* space for navbar */
+  padding-bottom: 60px; /* space for footer */
+}
+
+/* Login Card */
+.login-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 400px;
+  transition: 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #174374;
+}
+
+/* Input Fields */
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #174374;
+}
+
+/* Login Button */
+button {
+  /* width: 100%; */
+  padding: 12px 25px;
+  background: #174374;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: #122f54;
+}
+
+/* Error Message */
+#errorMsg {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}

@@ -1,0 +1,31 @@
+/* Profile Header */
+.profile-header {
+  background: linear-gradient(135deg, #007bff, #00b4d8);
+  color: white;
+}
+
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid white;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Card Styling */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+.card-title {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
