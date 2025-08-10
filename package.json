@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build" :"echo Building project..."
+
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
@@ -26,4 +28,10 @@
     "url": "https://github.com/hostelhacker23/Hostel-System/issues"
   },
   "homepage": "https://github.com/hostelhacker23/Hostel-System#readme"
+
+  
+
+
 }
+
+
