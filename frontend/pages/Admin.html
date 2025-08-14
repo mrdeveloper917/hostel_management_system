@@ -1,217 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin </title>
-    <!-- <link rel="shortcut icon" href="../images/logo_.jpg" type="image/jpg"> -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <style>
-    body {
-      background-color: #f4f7fa;
-    }
-
-    .navbar {
-      background-color: #174374;
-    }
-
-    .navbar-brand, .nav-link {
-      color: white !important;
-      font-weight: bold;
-    }
-
-    .nav-link:hover {
-      color: #ffc107 !important;
-    }
-
-    .admin-dashboard {
-      padding: 40px 20px;
-    }
-
-    .admin-card {
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: 0.3s;
-    }
-
-    .admin-card:hover {
-      transform: scale(1.02);
-    }
-
-    .summary-card {
-      background-color: #ffffff;
-      border-left: 6px solid #174374;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .table-section {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="./css/admin.css">
 </head>
-
 <body>
 
-
- <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg px-4 sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/index.html"><img class="Logo" src="../images/logo_.jpg" alt=""> Hostel System</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../admin pages/dashboard.html">Dashboard </a></li>
-          <li class="nav-item"><a class="nav-link" href="../admin pages/manage_students.html">Manage Students</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Room Allocation</a></li>
-          <li class="nav-item"><a class="nav-link" href="../admin pages/complaint.html">Complaints</a></li>
-          <li class="nav-item"><a class="nav-link" href="../admin pages/admin_logout.html">Log Out</a></li>
-
-          <!-- Sign In Modal HTML -->
-<!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signInModal">Sign in</button> -->
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg sticky-top" style="background:#174374;">
+  <div class="container-fluid">
+    <a class="navbar-brand text-warning" href="#">Hostel System</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link text-white" href="#">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="./admin_logout.html">Logout</a></li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  
-
-
-
-
-
-<!-- MAIN BODY -->
-  <div class="container admin-dashboard">
-    <div class="row mb-4">
-      <div class="col-md-8">
-        <h2 class="fw-bold text-primary">Welcome, Admin</h2>
-        <p class="text-muted">Here's the latest activity and overview of the hostel system.</p>
-      </div>
-      <div class="col-md-4 text-end">
-        <div class="summary-card">
-          <strong>👤 Admin Profile</strong>
-          <p class="mb-0">Name: Ayush Thakur</p>
-          <p class="mb-0">Role: Hostel Manager</p>
-          <p>Email: hostelhackers2326@gmail.com</p>
-        </div>
-      </div>
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="fw-bold">Admin Dashboard</h2>
+    <div>
+      <button class="btn btn-outline-light me-2" id="refreshBtn">Refresh</button>
+      <button class="btn btn-primary" id="addStudentBtn">+ Add Student</button>
     </div>
+  </div>
 
-    <!-- SUMMARY ROW -->
-    <div class="row mb-4">
-      <div class="col-md-4">
-        <div class="summary-card">
-          <h5>Total Students</h5>
-          <h3>120</h3>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="summary-card">
-          <h5>Total Rooms</h5>
-          <h3>40</h3>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="summary-card">
-          <h5>Pending Complaints</h5>
-          <h3>7</h3>
-        </div>
-      </div>
-    </div>
-
-    <!-- FUNCTIONAL CARDS -->
-    <div class="row g-4 mb-4">
-      <div class="col-md-4">
-        <div class="card admin-card p-3 bg-light">
-          <h5 class="card-title">📋 Student Records</h5>
-          <p class="card-text">View and manage all student registration data.</p>
-          <a href="#" class="btn btn-primary">View Students</a>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card admin-card p-3 bg-light">
-          <h5 class="card-title">🛏 Room Management</h5>
-          <p class="card-text">Allocate and update room status and capacity.</p>
-          <a href="#" class="btn btn-primary">Manage Rooms</a>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card admin-card p-3 bg-light">
-          <h5 class="card-title">⚠️ Complaints</h5>
-          <p class="card-text">Review and resolve complaints by students.</p>
-          <a href="#" class="btn btn-primary">Handle Complaints</a>
-        </div>
-      </div>
-    </div>
-
-    
-    <!-- RECENT STUDENT REGISTRATIONS -->
-    <div class="table-section mt-4">
-      <h5 class="mb-3">📄 Recent Student Registrations</h5>
-      <table class="table table-striped">
-        <thead class="table-primary">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Student Name</th>
-            <th scope="col">Room No</th>
-            <th scope="col">Branch</th>
-            <th scope="col">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>1</th>
-            <td>Raj Verma</td>
-            <td>102</td>
-            <td>Electrical</td>
-            <td>01 Aug 2025</td>
-          </tr>
-          <tr>
-            <th>2</th>
-            <td>Pooja Kumari</td>
-            <td>110</td>
-            <td>Mechanical</td>
-            <td>31 July 2025</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Ankit Singh</td>
-            <td>205</td>
-            <td>Computer</td>
-            <td>30 July 2025</td>
-          </tr>
-        </tbody>
+  <!-- STUDENTS TABLE -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>Students</h5>
+      <table class="table" id="studentsTable">
+        <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Room</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
       </table>
     </div>
   </div>
 
-
-    <!-- Footer -->
-     <footer class="text-center">
-    <div class="container">
-      <p class="mb-2">© 2025 Smart Hostel. All rights reserved.</p>
-<div class="footer-links d-flex justify-content-center gap-3">
-      <a href="./pages/login_page.html" class="btn btn-outline-primary btn-sm">Login</a>
-      <a href="./pages/register.html" class="btn btn-success btn-sm">Register Now</a>
+  <!-- ROOMS -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>Rooms</h5>
+      <div id="roomsList" class="row g-3"></div>
     </div>
+  </div>
+
+  <!-- COMPLAINTS -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>Complaints</h5>
+      <ul id="complaintsList" class="list-group"></ul>
     </div>
-  </footer>
+  </div>
+</div>
 
+<!-- Student Modal -->
+<div class="modal fade" id="studentModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form id="studentForm" class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Add/Edit Student</h5></div>
+      <div class="modal-body">
+        <input type="hidden" id="studentId">
+        <div class="mb-3"><label>Name</label><input id="s_name" class="form-control"></div>
+        <div class="mb-3"><label>Email</label><input id="s_email" class="form-control"></div>
+        <div class="mb-3"><label>Room</label><input id="s_room" class="form-control"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-
-    <script src="../js/admin.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.socket.io/4.7.1/socket.io.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/admin.js"></script>
 </body>
-
 </html>
