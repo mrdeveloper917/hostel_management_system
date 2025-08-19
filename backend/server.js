@@ -2,7 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+
+// Models
 const User = require('./models/User');
+const Student = require('./models/Student');
+const Complaint = require('./models/Complaint');
 
 const app = express();
 
@@ -18,6 +22,16 @@ mongoose.connect(process.env.MONGO_URI, {
 }).then(() => console.log('✅ MongoDB Connected'))
   .catch(err => console.log('❌ MongoDB Error:', err));
 
+/* =======================
+   TEST ROUTE (Deploy check)
+   ======================= */
+app.get("/", (req, res) => {
+    res.send("✅ Hostel Backend is running successfully!");
+});
+
+/* =======================
+   AUTH ROUTES
+   ======================= */
 // Signup Route
 app.post('/signup', async (req, res) => {
     try {
@@ -55,15 +69,20 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.listen(process.env.PORT, () => {
-    console.log(`🚀 Server running on port ${process.env.PORT}`);
+/* =======================
+   STUDENT ROUTES
+   ======================= */
+// Get all students
+app.get("/api/students", async (req, res) => {
+    try {
+        const students = await Student.find();
+        res.json(students);
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
 });
 
-
-
-
-//  Profile server
-
+// Get student by ID
 app.get("/api/students/:id", async (req, res) => {
     try {
         const student = await Student.findById(req.params.id);
@@ -72,4 +91,48 @@ app.get("/api/students/:id", async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: "Server error" });
     }
+});
+
+// Add new student
+app.post("/api/students", async (req, res) => {
+    try {
+        const { name, email, room } = req.body;
+        const student = new Student({ name, email, room });
+        await student.save();
+        res.status(201).json(student);
+    } catch (error) {
+        res.status(500).json({ message: "Error adding student" });
+    }
+});
+
+/* =======================
+   COMPLAINT ROUTES
+   ======================= */
+// Get all complaints
+app.get("/api/complaints", async (req, res) => {
+    try {
+        const complaints = await Complaint.find().populate("studentId", "name email");
+        res.json(complaints);
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+// Add new complaint
+app.post("/api/complaints", async (req, res) => {
+    try {
+        const { studentId, message } = req.body;
+        const complaint = new Complaint({ studentId, message });
+        await complaint.save();
+        res.status(201).json(complaint);
+    } catch (error) {
+        res.status(500).json({ message: "Error adding complaint" });
+    }
+});
+
+
+// Start Server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
 });
