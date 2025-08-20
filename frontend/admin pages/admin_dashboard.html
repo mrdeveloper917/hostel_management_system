@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background: #f4f6f9;
+      font-family: Arial, sans-serif;
+    }
+    .profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .dropdown-menu {
+      min-width: 250px;
+      border-radius: 12px;
+      padding: 15px;
+    }
+    .profile-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .profile-header img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+    .profile-header h6 {
+      margin: 10px 0 2px 0;
+      font-weight: bold;
+    }
+    .profile-header p {
+      font-size: 14px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top" style="background:#174374;">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white fw-bold" href="#">
+      <img class="Logo" src="../images/logo_.jpg" style="width:35px;height:35px;border-radius:50%;" alt=""> Hostel System
+    </a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item me-3"><a class="nav-link text-white" href="../admin pages/admin_dashboard.html">Dashboard</a></li>
+        <li class="nav-item dropdown">
+          <img src="../images/teamleader.jpg" class="profile-img dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <div class="profile-header">
+              <img src="../images/teamleader.jpg" alt="Admin">
+              <h6>Ayush Thakur</h6>
+              <p>Admin | ayushthakur9823@gmail.com</p>
+            </div>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../admin pages/admin_account.html">⚙️ Account Settings</a></li>
+            <li><a class="dropdown-item" href="../admin pages/admin_profile.html">📄 My Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger fw-bold" href="../admin pages/admin_logout.html">🚪 Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Dashboard -->
+<div class="container py-4">
+  <h2 class="fw-bold mb-4">Admin Dashboard</h2>
+
+  <!-- STUDENTS -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5>Students</h5>
+        <button class="btn btn-primary btn-sm" onclick="openStudentModal()">+ Add Student</button>
+      </div>
+      <table class="table" id="studentsTable">
+        <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Room</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ROOMS -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5>Rooms</h5>
+        <button class="btn btn-primary btn-sm" onclick="openRoomModal()">+ Add Room</button>
+      </div>
+      <ul class="list-group" id="roomsList"></ul>
+    </div>
+  </div>
+
+  <!-- COMPLAINTS -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5>Complaints</h5>
+        <button class="btn btn-primary btn-sm" onclick="openComplaintModal()">+ Add Complaint</button>
+      </div>
+      <ul class="list-group" id="complaintsList"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- Student Modal -->
+<div class="modal fade" id="studentModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form id="studentForm" class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Student</h5></div>
+      <div class="modal-body">
+        <input type="hidden" id="studentId">
+        <div class="mb-2"><input class="form-control" id="s_name" placeholder="Name" required></div>
+        <div class="mb-2"><input class="form-control" id="s_email" placeholder="Email" required></div>
+        <div class="mb-2"><input class="form-control" id="s_room" placeholder="Room" required></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Room Modal -->
+<div class="modal fade" id="roomModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form id="roomForm" class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Room</h5></div>
+      <div class="modal-body">
+        <input type="hidden" id="roomId">
+        <div class="mb-2"><input class="form-control" id="r_name" placeholder="Room Number" required></div>
+        <div class="mb-2">
+          <select class="form-control" id="r_status">
+            <option>Available</option>
+            <option>Occupied</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Complaint Modal -->
+<div class="modal fade" id="complaintModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form id="complaintForm" class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Complaint</h5></div>
+      <div class="modal-body">
+        <input type="hidden" id="complaintId">
+        <div class="mb-2"><input class="form-control" id="c_text" placeholder="Complaint text" required></div>
+        <div class="mb-2">
+          <select class="form-control" id="c_status">
+            <option>Pending</option>
+            <option>Resolved</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Sample Data
+  let students = [
+    { id: 1, name: "Amit Sharma", email: "amit@example.com", room: "101" },
+    { id: 2, name: "Riya Singh", email: "riya@example.com", room: "102" }
+  ];
+  let rooms = [
+    { id: 1, name: "Room 101", status: "Occupied" },
+    { id: 2, name: "Room 102", status: "Available" }
+  ];
+  let complaints = [
+    { id: 1, text: "Water leakage in bathroom", status: "Pending" },
+    { id: 2, text: "WiFi not working in Room 102", status: "Resolved" }
+  ];
+
+  // Render functions
+  function renderStudents() {
+    const tbody = document.querySelector("#studentsTable tbody");
+    tbody.innerHTML = "";
+    students.forEach((s,i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${i+1}</td>
+          <td>${s.name}</td>
+          <td>${s.email}</td>
+          <td>${s.room}</td>
+          <td>
+            <button class="btn btn-sm btn-warning me-1" onclick="editStudent(${s.id})">Edit</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteStudent(${s.id})">Delete</button>
+          </td>
+        </tr>
+      `;
+    });
+  }
+  function renderRooms() {
+    const list = document.getElementById("roomsList");
+    list.innerHTML = "";
+    rooms.forEach(r => {
+      list.innerHTML += `
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          ${r.name} - ${r.status}
+          <div>
+            <button class="btn btn-sm btn-warning me-1" onclick="editRoom(${r.id})">Edit</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteRoom(${r.id})">Delete</button>
+          </div>
+        </li>
+      `;
+    });
+  }
+  function renderComplaints() {
+    const list = document.getElementById("complaintsList");
+    list.innerHTML = "";
+    complaints.forEach(c => {
+      list.innerHTML += `
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          ${c.text} - ${c.status}
+          <div>
+            <button class="btn btn-sm btn-warning me-1" onclick="editComplaint(${c.id})">Edit</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteComplaint(${c.id})">Delete</button>
+          </div>
+        </li>
+      `;
+    });
+  }
+
+  // Student CRUD
+  const studentModal = new bootstrap.Modal(document.getElementById("studentModal"));
+  document.getElementById("studentForm").onsubmit = e => {
+    e.preventDefault();
+    const id = document.getElementById("studentId").value;
+    const s = { id: id||Date.now(), name: s_name.value, email: s_email.value, room: s_room.value };
+    if(id){
+      const i = students.findIndex(x=>x.id==id);
+      students[i]=s;
+    } else students.push(s);
+    studentModal.hide(); renderStudents();
+  };
+  function openStudentModal(){ studentId.value=""; studentForm.reset(); studentModal.show(); }
+  function editStudent(id){ const s=students.find(x=>x.id==id); studentId.value=s.id; s_name.value=s.name; s_email.value=s.email; s_room.value=s.room; studentModal.show(); }
+  function deleteStudent(id){ if(confirm("Delete this student?")){students=students.filter(x=>x.id!=id);renderStudents();} }
+
+  // Room CRUD
+  const roomModal = new bootstrap.Modal(document.getElementById("roomModal"));
+  document.getElementById("roomForm").onsubmit = e => {
+    e.preventDefault();
+    const id = roomId.value;
+    const r = { id: id||Date.now(), name: r_name.value, status: r_status.value };
+    if(id){ const i=rooms.findIndex(x=>x.id==id); rooms[i]=r; } else rooms.push(r);
+    roomModal.hide(); renderRooms();
+  };
+  function openRoomModal(){ roomId.value=""; roomForm.reset(); roomModal.show(); }
+  function editRoom(id){ const r=rooms.find(x=>x.id==id); roomId.value=r.id; r_name.value=r.name; r_status.value=r.status; roomModal.show(); }
+  function deleteRoom(id){ if(confirm("Delete this room?")){rooms=rooms.filter(x=>x.id!=id);renderRooms();} }
+
+  // Complaint CRUD
+  const complaintModal = new bootstrap.Modal(document.getElementById("complaintModal"));
+  document.getElementById("complaintForm").onsubmit = e => {
+    e.preventDefault();
+    const id = complaintId.value;
+    const c = { id: id||Date.now(), text: c_text.value, status: c_status.value };
+    if(id){ const i=complaints.findIndex(x=>x.id==id); complaints[i]=c; } else complaints.push(c);
+    complaintModal.hide(); renderComplaints();
+  };
+  function openComplaintModal(){ complaintId.value=""; complaintForm.reset(); complaintModal.show(); }
+  function editComplaint(id){ const c=complaints.find(x=>x.id==id); complaintId.value=c.id; c_text.value=c.text; c_status.value=c.status; complaintModal.show(); }
+  function deleteComplaint(id){ if(confirm("Delete this complaint?")){complaints=complaints.filter(x=>x.id!=id);renderComplaints();} }
+
+  // Initial Render
+  renderStudents(); renderRooms(); renderComplaints();
+</script>
+</body>
+</html>

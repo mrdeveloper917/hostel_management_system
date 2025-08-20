@@ -1,6 +1,6 @@
 // Multiple admin credentials
 const ADMIN_CREDENTIALS = [
-  { username: "admin1", password: "admin123" },
+  { username: "ayushkr07", password: "admin123" },
   { username: "admin2", password: "admin456" }
 ];
 
@@ -21,7 +21,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     message.textContent = `✅ Login Successful! Welcome ${validAdmin.username}`;
     // redirect to dashboard
     setTimeout(() => {
-      window.location.href = "../admin pages/admin_profile.html"; 
+      window.location.href = "../admin pages/admin_dashboard.html"; 
     }, 1000);
   } else {
     message.style.color = "red";
