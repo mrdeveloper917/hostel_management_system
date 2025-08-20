@@ -5,7 +5,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     const password = this.password.value;
 
     try {
-        const res = await fetch("http://localhost:3000/login", {
+        const res = await fetch("https://hostel-backend-fkio.onrender.com/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
@@ -15,7 +15,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         alert(text);
 
         if (res.status === 200) {
-            window.location.href = "Student_dashboard.html";
+            window.location.href = "../pages/Student_dashboard.html";
         }
     } catch (error) {
         alert("⚠️ Error connecting to server");
