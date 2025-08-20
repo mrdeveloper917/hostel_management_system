@@ -11,7 +11,10 @@ const Complaint = require('./models/Complaint');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin : "https://hostel-frontend-w0v5.onrender.com"
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
