@@ -1,116 +1,64 @@
-const API = 'http://localhost:5000/api/admin';
-const socket = io('http://localhost:5000'); // real-time updates
+const API = "http://localhost:5000/api/admin";
 
-// DOM refs
-const studentsTableBody = document.querySelector('#studentsTable tbody');
-const roomsList = document.getElementById('roomsList');
-const complaintsList = document.getElementById('complaintsList');
-
-async function fetchStudents(){
+// Load Students
+async function loadStudents() {
   const res = await fetch(`${API}/students`);
   const students = await res.json();
-  studentsTableBody.innerHTML = students.map((s,i)=>`
-    <tr>
-      <td>${i+1}</td>
-      <td>${s.name}</td>
-      <td>${s.email}</td>
-      <td>${s.roomNo||''}</td>
-      <td>
-        <button class="btn btn-sm btn-info" onclick="editStudent('${s._id}')">Edit</button>
-        <button class="btn btn-sm btn-danger" onclick="deleteStudent('${s._id}')">Delete</button>
-      </td>
-    </tr>
-  `).join('');
+  const tbody = document.querySelector("#studentsTable tbody");
+  tbody.innerHTML = "";
+  students.forEach((s, i) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${s.name}</td>
+        <td>${s.email}</td>
+        <td>${s.room}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" onclick="editStudent('${s._id}')">Edit</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteStudent('${s._id}')">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
 }
 
-async function fetchRooms(){
+// Load Rooms
+async function loadRooms() {
   const res = await fetch(`${API}/rooms`);
   const rooms = await res.json();
-  roomsList.innerHTML = rooms.map(r=>`
-    <div class="col-md-3">
-      <div class="p-3 border rounded">
-        <h6>Room ${r.roomNo}</h6>
-        <p>Status: ${r.status}</p>
-        <p>Capacity: ${r.capacity||0}</p>
-      </div>
-    </div>
-  `).join('');
+  const div = document.getElementById("roomsList");
+  div.innerHTML = "";
+  rooms.forEach(r => {
+    div.innerHTML += `
+      <div class="col-md-3">
+        <div class="card p-3 text-center">
+          <h6>Room ${r.number}</h6>
+          <p>Capacity: ${r.capacity}</p>
+          <p>Occupants: ${r.occupants}</p>
+        </div>
+      </div>`;
+  });
 }
 
-async function fetchComplaints(){
+// Load Complaints
+async function loadComplaints() {
   const res = await fetch(`${API}/complaints`);
-  const list = await res.json();
-  complaintsList.innerHTML = list.map(c=>`
-    <li class="list-group-item">
-      <strong>${c.title}</strong> — ${c.description}
-      <div class="float-end">
-        <button class="btn btn-sm btn-success" onclick="resolveComplaint('${c._id}')">Resolve</button>
-      </div>
-    </li>
-  `).join('');
+  const complaints = await res.json();
+  const ul = document.getElementById("complaintsList");
+  ul.innerHTML = "";
+  complaints.forEach(c => {
+    ul.innerHTML += `<li class="list-group-item">${c.studentName}: ${c.message} <span class="badge bg-warning">${c.status}</span></li>`;
+  });
 }
 
-// student modal handlers
-const studentModal = new bootstrap.Modal(document.getElementById('studentModal'));
-document.getElementById('addStudentBtn').addEventListener('click', ()=> {
-  document.getElementById('studentForm').reset();
-  document.getElementById('studentId').value = '';
-  studentModal.show();
-});
-document.getElementById('studentForm').addEventListener('submit', async (e)=>{
-  e.preventDefault();
-  const id = document.getElementById('studentId').value;
-  const payload = {
-    name: document.getElementById('s_name').value,
-    email: document.getElementById('s_email').value,
-    roomNo: document.getElementById('s_room').value
-  };
-  const url = id ? `${API}/students/${id}` : `${API}/students`;
-  const method = id ? 'PUT' : 'POST';
-  const res = await fetch(url, { method, headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-  if (res.ok) {
-    studentModal.hide();
-    await refreshAll();
-  } else {
-    alert('Save failed');
-  }
+// Init
+document.getElementById("refreshBtn").addEventListener("click", () => {
+  loadStudents();
+  loadRooms();
+  loadComplaints();
 });
 
-window.editStudent = async (id) => {
-  const res = await fetch(`${API}/students/${id}`);
-  const s = await res.json();
-  document.getElementById('studentId').value = s._id;
-  document.getElementById('s_name').value = s.name;
-  document.getElementById('s_email').value = s.email;
-  document.getElementById('s_room').value = s.roomNo || '';
-  studentModal.show();
-};
-
-window.deleteStudent = async (id) => {
-  if (!confirm('Delete student?')) return;
-  const res = await fetch(`${API}/students/${id}`, { method: 'DELETE' });
-  if (res.ok) refreshAll();
-};
-
-window.resolveComplaint = async (id) => {
-  const res = await fetch(`${API}/complaints/${id}`, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ status: 'resolved' }) });
-  if (res.ok) refreshAll();
-};
-
-async function refreshAll(){
-  await Promise.all([fetchStudents(), fetchRooms(), fetchComplaints()]);
-}
-
-document.getElementById('refreshBtn').addEventListener('click', refreshAll);
-
-// socket listeners
-socket.on('student:created', refreshAll);
-socket.on('student:updated', refreshAll);
-socket.on('student:deleted', refreshAll);
-socket.on('room:created', refreshAll);
-socket.on('room:updated', refreshAll);
-socket.on('complaint:created', refreshAll);
-socket.on('complaint:updated', refreshAll);
-
-// initial load
-refreshAll();
+// first load
+loadStudents();
+loadRooms();
+loadComplaints();

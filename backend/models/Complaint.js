@@ -1,11 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const ComplaintSchema = new mongoose.Schema({
-  studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
-  title: String,
-  description: String,
-  status: { type: String, enum: ['open','in-progress','resolved'], default: 'open' },
-  assignedTo: String
-}, { timestamps: true });
+const complaintSchema = new mongoose.Schema({
+  studentName: String,
+  message: String,
+  status: { type: String, default: "Pending" }
+});
 
-module.exports = mongoose.model('Complaint', ComplaintSchema);
+module.exports = mongoose.model("Complaint", complaintSchema);

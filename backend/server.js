@@ -56,6 +56,10 @@ app.post('/signup', async (req, res) => {
     }
 });
 
+const adminRoutes = require("./routes/admin");
+app.use("/api/admin", adminRoutes);
+
+
 // Login Route
 app.post('/login', async (req, res) => {
     try {
