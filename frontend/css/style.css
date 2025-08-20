@@ -156,6 +156,39 @@ header {
   border-radius: 8px;
 }
 
+/* Dark Mode Base */
+body.dark-mode {
+  background-color: #121212;
+  color: #e4e4e4;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode .navbar {
+  background-color: #1f1f1f !important;
+}
+
+.dark-mode .card,
+.dark-mode .dropdown-menu,
+.dark-mode footer {
+  background-color: #1e1e1e;
+  color: #e4e4e4;
+  border-color: #333;
+}
+
+.dark-mode a {
+  color: #80bfff;
+}
+
+.dark-mode .btn {
+  border-color: #444;
+}
+
+.dark-mode .btn-primary {
+  background-color: #0056b3;
+  border: none;
+}
+
+
 /* Footer */
 footer {
   background-color: #174374;

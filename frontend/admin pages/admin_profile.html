@@ -20,6 +20,33 @@
       border-radius: 50%;
       border: 3px solid #174374;
     }
+
+    /* Dark Mode CSS */
+    body.dark-mode {
+      background-color: #121212 !important;
+      color: #f1f1f1;
+    }
+    body.dark-mode .navbar {
+      background-color: #1b1b1b !important;
+    }
+    body.dark-mode .navbar .navbar-brand,
+    body.dark-mode .navbar .btn,
+    body.dark-mode .navbar span {
+      color: #f1f1f1 !important;
+    }
+    body.dark-mode .card {
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+    }
+    body.dark-mode .btn-outline-primary {
+      color: #f1f1f1;
+      border-color: #2193b0;
+    }
+    body.dark-mode .btn-outline-primary:hover {
+      background-color: #2193b0;
+      color: #fff;
+    }
   </style>
 </head>
 <body style="background:#f4f6f9;">
@@ -31,6 +58,9 @@
     </a>
     <span class="text-white ms-auto">👤 My Profile</span>
     <a href="admin_dashboard.html" class="btn btn-outline-light me-3">⬅ Back</a>
+     <button id="darkModeToggle" class="btn btn-outline-secondary ms-lg-3 mt-2 mt-lg-0">
+      🌙
+    </button>
   </div>
 </nav>
 
@@ -47,5 +77,6 @@
   </div>
 </div>
 
+<script src="../js/app.js"></script>
 </body>
 </html>

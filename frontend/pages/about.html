@@ -51,6 +51,64 @@
     .features-section {
       padding: 50px 0;
     }
+
+    /* 🌙 Dark Mode Styles */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .navbar {
+  background-color: #1f1f1f !important;
+}
+
+body.dark-mode .navbar .nav-link {
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .navbar .nav-link:hover {
+  color: #0d6efd !important;
+}
+
+body.dark-mode .about-section {
+  background: linear-gradient(135deg, #141e30, #243b55) !important;
+  color: #f1f1f1 !important;
+}
+
+body.dark-mode .team-section {
+  background-color: #1e1e1e !important;
+}
+
+body.dark-mode .card {
+  background-color: #2b2b2b !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #444 !important;
+}
+
+body.dark-mode .card small {
+  color: #b0b0b0 !important;
+}
+
+body.dark-mode footer {
+  background-color: #1f1f1f !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .btn-outline-light {
+  border-color: #bbb !important;
+  color: #ddd !important;
+}
+
+body.dark-mode .btn-outline-light:hover {
+  background-color: #ddd !important;
+  color: #121212 !important;
+}
+
+body.dark-mode .list-group-item {
+  color: #f1f1f1 !important;
+  border-color: #444 !important;
+}
+
   </style>
 
     
@@ -77,6 +135,11 @@
         <li class="nav-item"><a class="nav-link" href="../pages/admin_login.html">Admin Panel</a></li>
         <li class="nav-item"><a class="nav-link" href="../pages/about.html">About</a></li>
         <li class="nav-item"><a class="nav-link" href="../pages/login.html">Login</a></li>
+        <li class="nav-item">
+  <button id="darkModeToggle" class="btn btn-outline-secondary ms-lg-3 mt-2 mt-lg-0">
+    🌙
+  </button>
+</li>
 
         <!-- Sign In Button inside navbar (optional placement) -->
         <li class="nav-item">
