@@ -15,7 +15,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         alert(text);
 
         if (res.status === 200) {
-            window.location.href = "../pages/Student_dashboard.html";
+            window.location.href = "../pages/Student_Dashboard.html";
         }
     } catch (error) {
         alert("⚠️ Error connecting to server");
