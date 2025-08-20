@@ -10,15 +10,6 @@ const Complaint = require('./models/Complaint');
 
 const app = express();
 
-// ✅ CORS setup
-app.use(cors({
-    origin: [
-        "https://hostel-management-system-lelu.onrender.com", // aapka frontend domain
-        "http://localhost:3000" // development ke liye (optional)
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
-}));
 
 
 // Middleware
