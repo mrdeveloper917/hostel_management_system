@@ -20,12 +20,11 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log('✅ MongoDB Connected'))
-  .catch(err => console.log('❌ MongoDB Error:', err));
+// connect DB
+mongoose.connect(process.env.MONGO_URI || "mongodb+srv://ayushthakur9823:Ayush24@hostelmanagemnt.eezaacu.mongodb.net/?retryWrites=true&w=majority&appName=hostelManagemnt/ hostel_management")
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
+
 
 /* =======================
    TEST ROUTE (Deploy check)
