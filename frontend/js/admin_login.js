@@ -21,7 +21,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     message.textContent = `✅ Login Successful! Welcome ${validAdmin.username}`;
     // redirect to dashboard
     setTimeout(() => {
-      window.location.href = "Admin.html"; 
+      window.location.href = "../admin pages/admin_profile.html"; 
     }, 1000);
   } else {
     message.style.color = "red";
