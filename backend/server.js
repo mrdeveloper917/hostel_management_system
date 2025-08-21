@@ -14,7 +14,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin : "https://hostel-frontend-w0v5.onrender.com"
+    origin : "https://hostel-management-system-lelu.onrender.com"
 }));
 
 app.use(express.json());
