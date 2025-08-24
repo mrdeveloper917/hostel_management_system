@@ -1,163 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hostel System</title>
-    <link rel="shortcut icon" href="./images/logo_.jpg" type="image/jpg">
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Hostel System</title>
+  <link rel="shortcut icon" href="./images/logo_.jpg" type="image/jpg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+  <style>
+    /* General */
+    body {
+      transition: background-color 0.4s, color 0.4s;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+    }
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+      transition: 0.3s;
+    }
+    .nav-link:hover {
+      color: yellow !important;
+      transform: scale(1.05);
+    }
+
+    /* Hero */
+    .hero {
+      background: url('./images/home_page_image.jpg') center/cover no-repeat;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: white;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      z-index: 2;
+    }
+
+    /* Search */
+    #searchBox {
+      transition: all 0.3s;
+    }
+    #searchBox:focus {
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+      border-color: #007bff;
+    }
+
+    /* College Cards */
+    .college-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .college-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+    .college-card img {
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .college-card:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Floating Help Button */
+    #helpBtn {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.6);}
+      70% { box-shadow: 0 0 0 15px rgba(0, 123, 255, 0);}
+      100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);}
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #ddd;
+      transition: background-color 0.4s, color 0.4s;
+    }
+    footer h5 {
+      color: #fff;
+    }
+    footer a {
+      color: #aaa;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: #fff;
+    }
+    .social-icons a {
+      font-size: 1.3rem;
+      margin-right: 12px;
+      color: #fff;
+      transition: 0.3s;
+    }
+    .social-icons a:hover {
+      color: #00c6ff;
+    }
+
+    /* Dark Mode */
+    .dark-mode {
+      background-color: #121212;
+      color: #f1f1f1;
+    }
+    .dark-mode .navbar {
+      background: linear-gradient(90deg, #222, #444);
+    }
+    .dark-mode footer {
+      background: #000;
+      color: #bbb;
+    }
+    .dark-mode .college-card {
+      background: #1e1e1e;
+      color: #f1f1f1;
+    }
+  </style>
+</head>
 <body>
 
-
- <!-- Navbar -->
- <nav class="navbar navbar-expand-lg px-4 sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img class="Logo" src="./images/logo_.jpg" alt=""> Hostel System
-    </a>
-
-    <!-- Push toggle button to right using ms-auto -->
-    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <!-- <li class="nav-item"><a class="nav-link" href="./pages/Student_Dashboard.html">Student Dashboard</a></li> -->
-        <li class="nav-item"><a class="nav-link" href="./pages/admin_login.html">Admin Panel</a></li>
-        <li class="nav-item"><a class="nav-link" href="./pages/about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="./pages/login.html">Login</a></li>
-        <li class="nav-item">
-  <button id="darkModeToggle" class="btn btn-outline-secondary ms-lg-3 mt-2 mt-lg-0">
-    🌙
-  </button>
-</li>
-
-
-        <!-- Sign In Button inside navbar (optional placement) -->
-        <li class="nav-item">
-          <button class="btn btn-primary ms-lg-3 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#signInModal">Sign in</button>
-        </li>
-      </ul>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg px-4 sticky-top shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">
+        <img src="./images/logo_.jpg" style="height:40px;" class="me-2"> Smart Hostel
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="./pages/admin_login.html">Admin Panel</a></li>
+          <li class="nav-item"><a class="nav-link" href="./pages/about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="./pages/login.html">Login</a></li>
+          <li class="nav-item">
+            <button id="darkModeToggle" class="btn btn-light ms-lg-3 mt-2 mt-lg-0">🌙</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-warning ms-lg-3 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#signInModal">Sign in</button>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-
-<!-- Main content ke upar add karo welcome message -->
-<section class="text-center mt-4">
-  <h2 id="welcomeMsg" class="fw-bold text-primary"></h2>
-</section>
-
-
-
-    <!-- Main content -->
-    <main class="container my-5">
-  <!-- Search -->
-  <section class="text-center mb-5">
-    <h2 class="h3 mb-3">Find Your College</h2>
-    <input type="text" id="searchBox" oninput="filterColleges()" placeholder="Enter the College Name..." />
-<ul id="suggestions"></ul>
-
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="display-4 fw-bold">Smart Hostel Management</h1>
+      <p class="lead">Simplify hostel administration & improve student experience 🚀</p>
+      <a href="./pages/login.html" class="btn btn-lg btn-warning mt-3">Get Started</a>
+    </div>
   </section>
 
-  <!-- Left & Right -->
-  <div class="row align-items-center gy-4">
+  <!-- Welcome Message -->
+  <section class="text-center mt-4">
+    <h2 id="welcomeMsg" class="fw-bold text-primary"></h2>
+  </section>
+
+  <!-- Search Section -->
+  <section class="container text-center my-5">
+    <h2 class="h3 mb-3">Find Your College</h2>
+    <input type="text" id="searchBox" oninput="filterColleges()" placeholder="Enter the College Name..." class="form-control w-50 mx-auto" />
+    <ul id="suggestions" class="list-unstyled mt-2"></ul>
+  </section>
+
+  <!-- Colleges Carousel -->
+  <section class="container my-5">
+    <h2 class="text-center text-primary mb-4">🏫 Famous Bihar Polytechnic Colleges</h2>
+    <div id="collegeCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+              <div class="card college-card">
+                <img src="https://images.collegedunia.com/public/college_data/images/appImage/22686_Patna-Polytechnic-Patna-22686.jpg" alt="Patna Polytechnic">
+                <div class="card-body text-center">
+                  <h5 class="card-title">Patna Polytechnic</h5>
+                  <p>One of the oldest and most reputed Polytechnic Colleges in Bihar.</p>
+                  <a href="https://patnapolytechnic.org/" target="_blank" class="btn btn-primary">Explore</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card college-card">
+                <img src="https://www.admissionfever.com/Media/clgimg/gallery/432_img1645117894.jpg" alt="GP Muzaffarpur">
+                <div class="card-body text-center">
+                  <h5 class="card-title">GP Muzaffarpur</h5>
+                  <p>Known for excellent academics and technical training.</p>
+                  <a href="https://gpmuzaffarpur.org/" target="_blank" class="btn btn-primary">Explore</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+              <div class="card college-card">
+                <img src="https://images.shiksha.com/mediadata/images/1511173360phpw07uQj.jpeg" alt="GP Gaya">
+                <div class="card-body text-center">
+                  <h5 class="card-title">GP Gaya</h5>
+                  <p>Renowned for discipline and quality technical education.</p>
+                  <a href="https://gpgaya.org/" target="_blank" class="btn btn-primary">Explore</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card college-card">
+                <img src="https://www.admissionfever.com/Media/clgimg/gallery/432_img1645117866.jpg" alt="GP Bhagalpur">
+                <div class="card-body text-center">
+                  <h5 class="card-title">GP Bhagalpur</h5>
+                  <p>Popular institute with modern infrastructure and labs.</p>
+                  <a href="https://gpbhagalpur.org/" target="_blank" class="btn btn-primary">Explore</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+          <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+              <div class="card college-card">
+                <img src="https://www.collegebatch.com/static/clg-gallery/government-polytechnic-saharsa-266616.jpg" alt="GP Saharsa">
+                <div class="card-body text-center">
+                  <h5 class="card-title">GP Saharsa</h5>
+                  <p>Emerging polytechnic institute serving north Bihar.</p>
+                  <a href="https://gpsaharsa.org/" target="_blank" class="btn btn-primary">Explore</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#collegeCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#collegeCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Info Section -->
+  <div class="container my-5 row align-items-center gy-4">
     <div class="col-md-6">
-      <h1 class="h2 mb-3 text-primary">Smart Hostel Management System</h1>
-      <p>This project is designed for college minor submission. It manages student allocation, room status, and admin control in a user-friendly interface.</p>
+      <h2 class="text-primary">Why Smart Hostel?</h2>
+      <p class="fs-5">✨ Student allocation, room status, and admin control — all in a modern dashboard.</p>
     </div>
     <div class="col-md-6 text-center">
-      <img src="./images/home_page_image.jpg" alt="Hostel Illustration..." class="img-fluid">
+      <img src="./images/home_page_image.jpg" class="img-fluid rounded shadow-lg" alt="Hostel Illustration">
     </div>
   </div>
-</main>
 
-<!-- Floating Help Button -->
-<button id="helpBtn" class="btn btn-info position-fixed" 
-        style="bottom:20px; right:20px; border-radius:50%; width:60px; height:60px; font-size:1.5rem;">
-  💬
-</button>
+  <!-- Help Button -->
+  <button id="helpBtn" class="btn btn-info position-fixed" style="bottom:20px; right:20px; border-radius:50%; width:60px; height:60px; font-size:1.5rem;">💬</button>
 
-<!-- Help Modal -->
-<div class="modal fade" id="helpModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-3">
-      <div class="modal-header">
-        <h5 class="modal-title">Need Help?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <p>Hi! I am here to assist you with hostel queries.</p>
-        <input type="text" class="form-control" placeholder="Type your question...">
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-dismiss="modal">Send</button>
+  <!-- Help Modal -->
+  <div class="modal fade" id="helpModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Need Help?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>Hi! I am here to assist you with hostel queries.</p>
+          <input type="text" class="form-control" placeholder="Type your question...">
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-dismiss="modal">Send</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-
-
-
-    <!-- Footer -->
-     <footer class="text-center">
+  <!-- Footer -->
+  <footer class="pt-5 pb-3 mt-5">
     <div class="container">
-      <p class="mb-2">© 2025 Smart Hostel. All rights reserved.</p>
-<div class="footer-links d-flex justify-content-center gap-3">
-      <a href="./pages/login.html" class="btn btn-outline-primary btn-sm">Login</a>
-      <a href="./pages/singup.html" class="btn btn-success btn-sm">Register Now</a>
-    </div>
+      <div class="row">
+        <div class="col-md-3">
+          <h5>Smart Hostel</h5>
+          <p>Modern Hostel Management System for students and admins to simplify room allocation and complaint handling.</p>
+        </div>
+        <div class="col-md-3">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="./pages/about.html">About</a></li>
+            <li><a href="./pages/login.html">Login</a></li>
+            <li><a href="./pages/admin_login.html">Admin Panel</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Resources</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Help & Support</a></li>
+            <li><a href="#">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Follow Us</h5>
+          <div class="social-icons">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-twitter"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-3" style="border-color:#444;">
+      <div class="text-center">
+        <small>© <span id="year"></span> Smart Hostel. All Rights Reserved.</small>
+      </div>
     </div>
   </footer>
 
-<script>
-// ------------------ Auto Typing Welcome Message ------------------
-const welcomeText = "Welcome to Smart Hostel Management System!";
-let i = 0;
-function typeWriter() {
- if (i < welcomeText.length) {
-    document.getElementById("welcomeMsg").innerHTML += welcomeText.charAt(i);
-    i++;
-    setTimeout(typeWriter, 80);
-  }
-}
-window.onload = typeWriter;
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Typing Welcome Message
+    const welcomeText = "Welcome to Smart Hostel Management System!";
+    let i = 0;
+    function typeWriter() {
+      if (i < welcomeText.length) {
+        document.getElementById("welcomeMsg").innerHTML += welcomeText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 70);
+      }
+    }
+    window.onload = typeWriter;
 
-// ------------------ Scroll to Top Button ------------------
-let scrollBtn = document.getElementById("scrollBtn");
-window.onscroll = function() {
-  if (document.documentElement.scrollTop > 200) {
-    scrollBtn.style.display = "block";
-  } else {
-    scrollBtn.style.display = "none";
-  }
-};
-function scrollToTop() {
-  window.scrollTo({top: 0, behavior: 'smooth'});
-}
+    // Year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-// ------------------ Auto Update Footer Year ------------------
-document.querySelector("footer p").innerHTML = `© ${new Date().getFullYear()} Smart Hostel. All rights reserved.`;
+    // Help Button
+    document.getElementById('helpBtn').addEventListener('click', () => {
+      new bootstrap.Modal(document.getElementById('helpModal')).show();
+    });
 
-
-
-document.getElementById('helpBtn').addEventListener('click', () => {
-  new bootstrap.Modal(document.getElementById('helpModal')).show();
-});
-
-</script>
-
-
-    <script src="./js/app.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    // Dark Mode Toggle
+    document.getElementById("darkModeToggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
+  <script src="./js/app.js"></script>
+  <script src="./js/singup.js"></script>
+  <script src="./js/login.js"></script>
 </body>
-
 </html>

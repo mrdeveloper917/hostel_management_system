@@ -1,23 +1,22 @@
-document.getElementById("loginForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    const email = this.email.value;
-    const password = this.password.value;
+  const formData = new FormData(e.target);
+  const body = JSON.stringify(Object.fromEntries(formData.entries()));
 
-    try {
-        const res = await fetch("https://hostel-backend-fkio.onrender.com/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-        });
+  const res = await fetch("https://hostel-backend-fkio.onrender.com/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body,
+  });
 
-        const text = await res.text();
-        alert(text);
+  const data = await res.json();
 
-        if (res.status === 200) {
-            window.location.href = "../pages/Student_Dashboard.html";
-        }
-    } catch (error) {
-        alert("⚠️ Error connecting to server");
-    }
+  if (res.ok) {
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+    window.location.href = "../index.html";
+  } else {
+    alert(data.error);
+  }
 });
