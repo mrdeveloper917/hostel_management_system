@@ -1,15 +1,35 @@
-document.getElementById("signupForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+const form = document.getElementById('signupForm');
 
-  const formData = new FormData(e.target);
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  const res = await fetch("https://hostel-backend-fkio.onrender.com/signup", {
-    method: "POST",
-    body: formData,
-  });
+    // FormData object bana lo
+    const formData = new FormData(form);
 
-  const data = await res.json();
-  alert(data.message || data.error);
+    try {
+        const res = await fetch('http://localhost:5000/api/auth/student/register', {
+            method: 'POST',
+            body: formData  // ✅ files + text dono handle karega
+        });
 
-  if (res.ok) window.location.href = "../pages/login_page.html";
+        // Response ko parse karo
+        const data = await res.json();
+
+        if (!res.ok) {
+            alert(data.message || 'Signup failed');
+            return;
+        }
+
+        // alert('Signup successful! ✅');
+
+    setInterval(() => {
+
+        window.location.href = "../pages/login.html"
+    },2000)
+
+
+    } catch (err) {
+        console.error(err);
+        alert('Something went wrong! ❌');
+    }
 });

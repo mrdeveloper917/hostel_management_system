@@ -1,22 +1,32 @@
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
+// login.js (frontend)
+document.getElementById("loginForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  const formData = new FormData(e.target);
-  const body = JSON.stringify(Object.fromEntries(formData.entries()));
+  try {
+    // ✅ Input values ko properly lo
+    const email = document.getElementById("email").value.trim();
+    // console.log(email);
+    
+    const password = document.getElementById("password").value.trim();
 
-  const res = await fetch("https://hostel-backend-fkio.onrender.com/signup", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body,
-  });
+    const res = await fetch("http://localhost:5000/api/auth/student/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }) // ✅ clean way
+    });
 
-  const data = await res.json();
+    const data = await res.json();
+    console.log("Login Response:", data);
 
-  if (res.ok) {
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
-    window.location.href = "../index.html";
-  } else {
-    alert(data.error);
+    if (res.ok) {
+      localStorage.setItem("studentToken", data.token); // save JWT
+      alert("Login successful!");
+      window.location.href = "student-dashboard.html";
+    } else {
+      alert(data.message || "Invalid credentials ❌");
+    }
+  } catch (err) {
+    console.error("Login Error:", err);
+    alert("Something went wrong! ❌");
   }
 });
